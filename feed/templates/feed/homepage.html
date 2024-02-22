@@ -2,5 +2,9 @@
 {% block title%}Home page{%endblock%}
 
 {%block body%}
-    Blup
+    {%for post in posts%}
+        <h1>"{{post.text}}" written at  {{post.date}}</h1>
+        <hr>
+
+    {%endfor%}
 {%endblock%}
