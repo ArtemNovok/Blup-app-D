@@ -5,7 +5,7 @@ from django.views.generic import ListView
 
 class HomePage(ListView):
     http_method_names = ["get"]
-    template_name = "home.html"
+    template_name = "feed/homepage.html"
     model = Post
     context_object_name = "posts"
     queryset = Post.objects.all().order_by("-id")[:30]
