@@ -1,35 +1,7 @@
 {%extends "base.html"%} 
-{% load sorl_thumbnail %}
 {% block title%}Home page{%endblock%} {%block body%}
 {%for post in posts%}
 <!-- component  from https://tailwindcomponents.com/component/post-artical-->
-<div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" Style="width:75rem;">
-  <div class="flex justify-between items-center">
-    <span class="font-light text-gray-600">{{post.date|date:"F j, Y, g:i a"}}</span>
-  </div>
-  <div class="mt-2">
-    <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="#"
-      >{{post.title}}</a
-    >
-    <p class="mt-2 text-gray-600">
-      {{post.text}}
-    </p>
-  </div>
-  <div class="flex justify-between items-center mt-4">
-    <a class="text-blue-600 hover:underline" href="#"> 
-        {# TODO add a detail view  #}
-        Read more
-    </a>
-    <div>
-        {# TODO Add a uniqe user #}
-      <a class="flex items-center" href="#">
-        {% thumbnail post.author.profile.image "373x373" crop="center" as im %}
-        <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="avatar">
-        {% endthumbnail %}
-        <h1 class="text-gray-700 font-bold">{{post.author.username}}</h1>
-      </a>
-    </div>
-  </div>
-</div>
+{% include "includes/post.html" with post=post read_more=True %}
 
 {%endfor%} {%endblock%}
