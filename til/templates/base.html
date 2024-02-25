@@ -24,6 +24,12 @@
           <span class="text-sm font-medium">Home</span>
         </a>
       </li>
+      <li>
+        <a href="{% url 'feed:new' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
+          <span class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i class="bx bx-message-square-add"></i></span>
+          <span class="text-sm font-medium">Make a new post</span>
+        </a>
+      </li>
       {% if request.user.is_authenticated%}
       <li>
         <a href="{% url 'account_logout' %}" class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
@@ -48,6 +54,31 @@
           {% block content%}{%endblock%}
       {% endblock body %}
   </div>
+
+
+
+
+
+
+{% if request.user.is_anonymus%}
+<!-- component  https://tailwindcomponents.com/component/modal-10 -->
+<div class="bg-gray-800 bg-opacity-75 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 hidden js-modal">
+  <div class="bg-white px-16 py-14 rounded-md text-center">
+    {# TODO add post#}
+    <h1 class="text-xl mb-4 font-bold text-slate-500">Form</h1>
+    <button type="button"
+      class=" js-submit   inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-indigo-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
+    >
+        Create post
+  </button>
+  </div>
+</div>
+{% endif%}
+
+
+
+
+
 </div> 
 </body>
 </html>
