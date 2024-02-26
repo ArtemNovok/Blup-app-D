@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     
     "profiles",
     'sorl.thumbnail',
+    
+    'followers',
 ]
 
 MIDDLEWARE = [
