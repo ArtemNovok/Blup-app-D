@@ -50,7 +50,7 @@
       
     </ul>
   </div>
-  <div class="m-5 p-16">
+  <div class="m-1 p-16">
       {% block body %}
           {% block content%}{%endblock%}
       {% endblock body %}
@@ -72,8 +72,8 @@
         <h3>Text</h3>
         <textarea data-post-url="{% url 'feed:new' %}" class="w-full border-2 border-blue-500 my-4  js-post-text" rows='5' maxlength="240" placeholder="Enter your text"></textarea>
     </div>
-    <button class="bg-red-500 px-4 py-2 rounded-md text-md text-white js-toggle-modal " type='button'>Cancel</button>
-    <button class="bg-indigo-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold js-sub-form " type='button'>Submit</button>
+    <button class="  shadow-indigo-200 shadow-lg font-medium active:shadow-none active:scale-95 hover:bg-green-600 focus:bg-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:bg-gray-400/80 disabled:shadow-none disabled:cursor-not-allowed transition-colors duration-200   bg-red-500 px-4 py-2 rounded-md text-md text-white js-toggle-modal " type='button'>Cancel</button>
+    <button class="shadow-indigo-200 shadow-lg font-medium active:shadow-none active:scale-95 hover:bg-green-600 focus:bg-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:bg-gray-400/80 disabled:shadow-none disabled:cursor-not-allowed transition-colors duration-200    bg-indigo-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold js-sub-form " type='button'>Submit</button>
   </div>
 </div>
 {% endif %}
