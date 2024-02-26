@@ -7,14 +7,14 @@
 	<div class="bg-white p-8 rounded-lg shadow-md max-w-md " style="width:75rem;">
 		<!-- Banner Profile -->
 		<div class="relative">
-			
+			<a href = "{% url 'profiles:update_image' user.id %}">
             {% thumbnail user.profile.image "373x150" crop="center" as im %}
 			<img src="{{im.url}}" alt="Banner Profile" class="w-full rounded-t-lg">
             {% endthumbnail %}
             {% thumbnail user.profile.image "373x373" crop="center" as im %}
              <img class="absolute bottom-0 left-2/4 transform -translate-x-1/2 translate-y-1/2 w-24 h-24 rounded-full border-4 border-white" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="avatar">
             {% endthumbnail %}
-			
+			</a>
 			
 		</div>
 		<!-- User Info with Verified Button -->

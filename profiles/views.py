@@ -1,15 +1,67 @@
 from typing import Any
 
-from django.http.request import HttpRequest as HttpRequest
-from django.http.response import HttpResponse as HttpResponse
+from django.forms.models import BaseModelForm
 from feed.models import Post
+from .models import UserProfile
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseBadRequest
-from django.contrib.auth.models import User
-from django.views.generic import DetailView, View
-from django.contrib.auth.mixins import LoginRequiredMixin
 from followers.models import Follower
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.request import HttpRequest as HttpRequest
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.views.generic import DetailView, View, UpdateView
+from django.http.response import HttpResponse as HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
+
+class UpdateProfile(LoginRequiredMixin, UpdateView):
+    template_name = 'profiles/update.html'
+    model = UserProfile
+    fields={
+        
+        "image"
+    }
+    success_url="/"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        obj = form.save(commit=False)
+        print(obj)
+        print(obj)
+        print(obj)
+        print(obj.image)
+        print(obj.image)
+        print(obj.image)
+        return super().form_valid(form)
+
+
+
+
+
+
+
+
+
+
+
+class ProfileViewMe(LoginRequiredMixin,DetailView):
+    http_method_names=['get']
+    template_name='profiles/profileme.html'
+    model = User
+    context_object_name = 'user'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        request = self.request
+        return super().dispatch(request, *args, **kwargs)
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        user = self.get_object()
+        context=super().get_context_data(**kwargs)
+        context['total_posts'] = Post.objects.filter(author = user).count()
+        context['followers'] = Follower.objects.filter(following = user).count()
+        if self.request.user.is_authenticated:
+            context['you_follow'] = Follower.objects.filter(following=user, followed_by=self.request.user).exists()
+            
+        return context    
+
 class ProfileView(DetailView):
     http_method_names=['get']
     template_name='profiles/profile.html'
