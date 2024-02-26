@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block body%}
+
+<div id="posts-container">
+    {%for post in posts%}
+    <!-- component  from https://tailwindcomponents.com/component/post-artical-->
+    {% include "includes/post.html" with post=post read_more=True %}
+    {% empty %}
+    <div class='container text-center'>
+        <h1> No poeple followed or no post from poeple you are following </h1>
+    <div>
+    {%endfor%} 
+</div>
+
+{% endblock %}

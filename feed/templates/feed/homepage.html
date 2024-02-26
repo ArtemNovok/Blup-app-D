@@ -1,6 +1,6 @@
 {%extends "base.html"%} 
 {% block title%}Home page{%endblock%} {%block body%}
-<div id="posts-container">
+<div id="posts-container" class="overflow-auto h-full shadow">
 {%for post in posts%}
 <!-- component  from https://tailwindcomponents.com/component/post-artical-->
 {% include "includes/post.html" with post=post read_more=True %}

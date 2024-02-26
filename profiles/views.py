@@ -1,4 +1,7 @@
 from typing import Any
+
+from django.http.request import HttpRequest as HttpRequest
+from django.http.response import HttpResponse as HttpResponse
 from feed.models import Post
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseBadRequest
@@ -14,10 +17,17 @@ class ProfileView(DetailView):
     context_object_name = 'user'
     slug_field = 'username'
     slug_url_kwarg = 'username'
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        request = self.request
+        return super().dispatch(request, *args, **kwargs)
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         user = self.get_object()
         context=super().get_context_data(**kwargs)
         context['total_posts'] = Post.objects.filter(author = user).count()
+        context['followers'] = Follower.objects.filter(following = user).count()
+        if self.request.user.is_authenticated:
+            context['you_follow'] = Follower.objects.filter(following=user, followed_by=self.request.user).exists()
+            
         return context
 class FollowView(LoginRequiredMixin,View):
     http_method_names=['post']
