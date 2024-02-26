@@ -64,10 +64,16 @@
 {% if request.user.is_authenticated%}
 <!-- component  https://tailwindcomponents.com/component/modal-10 -->
 <div class="bg-gray-800 bg-opacity-75 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0 hidden  js-modal">
-  <div class="bg-white px-16 py-14 rounded-md text-center">
-    <h1 class="text-xl mb-4 font-bold text-slate-500">Do you Want Delete</h1>
-    <button class="bg-red-500 px-4 py-2 rounded-md text-md text-white js-toggle-modal ">Cancel</button>
-    <button class="bg-indigo-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold">Ok</button>
+  <div class="bg-white px-16 py-14 rounded-md text-center" style="width:50rem;">
+    <h1 class="text-xl mb-4 font-bold text-slate-500">Create new post</h1>
+    <div class='w-full'>
+        <h3>Titile</h3>
+        <textarea data-post-url="{% url 'feed:new' %}" class="w-full border-2 border-blue-500 my-4  js-post-title" rows='1' maxlength="35" placeholder="Enter your title"></textarea>
+        <h3>Text</h3>
+        <textarea data-post-url="{% url 'feed:new' %}" class="w-full border-2 border-blue-500 my-4  js-post-text" rows='5' maxlength="240" placeholder="Enter your text"></textarea>
+    </div>
+    <button class="bg-red-500 px-4 py-2 rounded-md text-md text-white js-toggle-modal " type='button'>Cancel</button>
+    <button class="bg-indigo-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold js-sub-form " type='button'>Submit</button>
   </div>
 </div>
 {% endif %}

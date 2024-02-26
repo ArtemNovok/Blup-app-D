@@ -32,3 +32,37 @@ $(document).on('click', '.js-toggle-modal', function(e){
     console.log("bla")
     $(".js-modal").toggleClass("hidden")
 })
+.on('click', '.js-sub-form', function(e){
+    e.preventDefault()
+    console.log("bla bal lba labsfdjf")
+    const title = $('.js-post-title').val().trim()
+    const text = $('.js-post-text').val().trim()
+    const $btn = $(this)
+
+
+    if(!text.length && !title.length){
+        return false
+    }
+
+    $btn.prop("disabled", true).text("Posting!")
+    $.ajax({
+        type:'POST',
+        url: $('.js-post-text').data("post-url"),
+        data: {
+            title: title,
+            text:text
+        },
+        success: (dataHtml) =>{
+            $(".js-modal").addClass("hidden");
+            $('#posts-container').prepend(dataHtml);
+            $btn.prop("disabled", false).text("New Post");
+            $('.js-post-title').val('')
+            $('.js-post-text').val('')
+        },
+        error:(error) => {
+            console.warn(error)
+            $btn.prop("disabled", false).text("Error");
+
+        }
+    })
+});

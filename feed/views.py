@@ -1,11 +1,11 @@
 from typing import Any
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.http.request import HttpRequest as HttpRequest
 from .models import Post
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView, CreateView
+from django.http import HttpResponse
+from django.forms.models import BaseModelForm
+from django.http.request import HttpRequest as HttpRequest
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView,DetailView, CreateView
 
 # Create your views here.
 
@@ -36,3 +36,19 @@ class CreatePost(LoginRequiredMixin, CreateView):
         obj.author = self.request.user
         obj.save()
         return super().form_valid(form)
+    def post (self, request, *args, **kwargs):
+        post = Post.objects.create(
+            title= request.POST.get('title'),
+            text= request.POST.get('text'),
+            author= request.user
+        )
+        
+        return render(
+            request,
+            "includes/post.html",
+            {
+                "post":post,
+                "read_more":True,
+            },
+            content_type='application/html'
+        )
