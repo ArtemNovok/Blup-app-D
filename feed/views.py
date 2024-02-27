@@ -6,7 +6,7 @@ from followers.models import Follower
 from django.forms.models import BaseModelForm
 from django.http.request import HttpRequest as HttpRequest
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView,DetailView, CreateView, TemplateView
+from django.views.generic import ListView,DetailView, CreateView, TemplateView, UpdateView
 
 # Create your views here.
 
@@ -40,6 +40,12 @@ class DetailView(DetailView):
     template_name = 'feed/detail.html'
     model = Post
     context_object_name = 'post'
+    
+class EditPost(LoginRequiredMixin, UpdateView):
+    template_name = "feed/editpost.html"
+    model = Post
+    fields=['title', 'text']
+    success_url = '/'
     
 class CreatePost(LoginRequiredMixin, CreateView):
     template_name = 'feed/new_post.html'

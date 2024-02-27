@@ -14,33 +14,13 @@ from django.http.response import HttpResponse as HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class UpdateProfile(LoginRequiredMixin, UpdateView):
-    template_name = 'profiles/update.html'
-    model = UserProfile
-    fields={
-        
-        "image"
-    }
-    success_url="/"
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        obj = form.save(commit=False)
-        print(obj)
-        print(obj)
-        print(obj)
-        print(obj.image)
-        print(obj.image)
-        print(obj.image)
-        return super().form_valid(form)
-
-
-
-
-
-
-
-
-
-
+# class UpdateProfile(LoginRequiredMixin, UpdateView):
+#     template_name = 'profiles/update.html'
+#     model = UserProfile
+#     fields = ['image']
+#     success_url="/"
+    
+    
 
 class ProfileViewMe(LoginRequiredMixin,DetailView):
     http_method_names=['get']

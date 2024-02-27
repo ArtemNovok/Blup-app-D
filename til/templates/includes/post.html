@@ -18,7 +18,15 @@
           Read more
       </a>
       {%else%}
-       <div></div>
+      
+      {% if user.username == post.author.username%}
+      <a class="text-blue-600 hover:underline" href="{% url 'feed:edit' post.id %}"> 
+        Edit
+      </a>
+      {%else%}
+      <div></div>
+      {% endif %}
+
       {% endif%}
       <div>
         <a class="flex items-center" href="{% url 'profiles:profile' post.author.username %}">
