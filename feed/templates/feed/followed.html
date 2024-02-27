@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {%block body%}
 
-<div id="posts-container">
+<div id="posts-container" class="overflow-auto h-full">
     {%for post in posts%}
     <!-- component  from https://tailwindcomponents.com/component/post-artical-->
     {% include "includes/post.html" with post=post read_more=True %}
